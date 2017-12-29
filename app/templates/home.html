@@ -1,0 +1,145 @@
+{%extends "base.html"%}
+
+{%block header%}
+	<nav>
+		<ul class="nav nav-pills pull-right">
+			<li role="presentation" class="active">
+        <a href={{url_for("signOut")}}>Sign out</a>
+			</li>
+      <li role="presentation">
+        <a href={{url_for("addWish")}}>Add Wish</a>
+      </li>
+		</ul>
+	</nav>
+	<h3 class="text-muted">Python Flask App</h3>
+{%endblock header%}
+
+{%block container%}
+{{super()}}
+<div class="modal fade" id="editModal" tbindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="editModalLabel">Update Wish</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-group">
+						<label for="recipient-name" class="control-label">Title:</label>
+                        <input type="text" class="form-control" id="editTitle">
+                    </div>
+					<div class="form-group">
+						<label for="message-text" class="control-label">Description:</label>
+                        <textarea class="form-control" id="editDescription"></textarea>
+	 				</div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtPost">Photos</label>
+                        <div>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">
+                                        Browse&hellip;
+                                        <input id="fileUpload" name="fileUpload" type="file" method="POST" enctype="multipart/form-data">
+                                        <input id="filePath" name="filePath" type="hidden">
+                                    </span>
+                                </span>
+                                <div class="pull-right">
+                                    <img id="imgUpload" class="img-thumbnail"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="from-group">
+                        <label for="markAsDone">
+                            Have you already accomplished this?
+                        </label>
+                        <br/>
+                        <input type="checkbox" id="isDone" name="isDone">
+                        Mark as Done
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </div>
+                    <div class="from-group">
+                        <label for="markAsPrivate">
+                            Mark this as private and not visible to others.
+                        </label>
+                        <br/>
+                        <input type="checkbox" id="isPrivate" name="isPrivate">
+                        Mark as Private
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    </div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button id="updateWish" type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="deleteModal" tbindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="deleteModalLabel">Delete wish</h4>
+        </div>
+        <div class="modal-body">
+					<p style="color:red;">You are going to delete this forever!!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="confirmDeleteWish(this)">Confirm delete</button>
+        </div>
+     </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<input type="hidden" id="hdnStart" value="1">
+<input type="hidden" id="hdnEnd" value="5">
+
+{%endblock container%}
+
+{%block jumbotron%}
+	<div class="jumbotron">
+		<h1>Welcome Home !!</h1>
+    <!-- <div class="list-group"><a class="list-group-item active" href="#"><h4 -->
+          <!-- class="list-group-item-heading">Wish Title</h4> -->
+      <!-- <p class="list-group-item-text">Wish Description</p> -->
+      <!-- </a></div> -->
+</div>
+{%endblock jumbotron%}
+
+{%block footer%}
+{{super()}}
+<script type="text/javascript" charset="utf-8" src={{url_for("static", filename="js/jquery.tmpl.js")}}></script>
+<script type="text/x-jQuery-tmpl" id="listTemplate">
+<li class="list-group-item">
+  <div class="checkbox">
+    <label class="wish-title">${Title}</label>
+  </div>
+  <div class="pull-right action-buttons">
+    <a data-id=${Id} data-toggle="modal"
+    data-target="#deleteModal" onclick="deleteWish(this)"><span style="color:red;" class="glyphicon glyphicon-trash"></span>
+    </a>
+	</div>
+	<div class="pull-right action-buttons">
+    <a data-id=${Id} data-toggle="modal"
+    data-target="#editModal" onclick="editWish(this)">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </a>
+  </div>
+</li>
+</script>
+<script type="text/javascript" charset="utf-8" src={{url_for("static", filename="js/getWishByUser.js")}}>
+</script>
+<script type="text/javascript" charset="utf-8" src={{url_for("static", filename="js/editWish.js")}}>
+</script>
+<script type="text/javascript" charset="utf-8" src={{url_for("static", filename="js/updateWish.js")}}>
+</script>
+<script type="text/javascript" charset="utf-8" src={{url_for("static", filename="js/deleteWish.js")}}>
+</script>
+<script type="text/javascript" charset="utf-8" src={{url_for("static", filename="js/confirmDeleteWish.js")}}>
+</script>
+{%endblock footer%}

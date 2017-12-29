@@ -1,0 +1,13 @@
+{
+  "libs": [
+    ],
+  "loadEagerly": [
+      "/home/c/Flask_Bucket/app/static/js/jquery-3.2.0.min.js"
+    ],
+  "plugins": {
+      "requirejs": {
+            "baseURL": "./",
+            "paths": {}
+          }
+    }
+}

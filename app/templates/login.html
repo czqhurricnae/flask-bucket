@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+
+{%block header%}
+  <nav>
+    <ul class="nav nav-pills pull-right">
+      <li role="presentation" ><a href={{url_for("index")}}>Home</a></li>
+      <li role="presentation" class="active"><a href="#">Sign In</a></li>
+      <li role="presentation" ><a href={{url_for("signUp")}}>Sign Up</a></li>
+    </ul>
+  </nav>
+  <h3 class="text-muted">Python Flask App</h3>
+{%endblock header%}
+
+{%block flashed_messages%}
+{{super()}}
+{%endblock flashed_messages%}
+
+{% block jumbotron%}
+  <div class="jumbotron">
+    <h1>Bucket List App</h1>
+    <form class="form-signin" action="/signIn" method="post">
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="username" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+    <br/>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+    <br/>
+    <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+  </div>
+{% endblock jumbotron%}
+
+{%block footer%}
+{{super()}}
+{%endblock footer%}
+
+{%block js%}
+{{super()}}
+{%endblock js%}

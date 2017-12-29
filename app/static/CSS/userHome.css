@@ -1,0 +1,29 @@
+trash {
+	color: rgb(209, 91, 71);
+}
+
+.panel-body .checkbox {
+	display: inline-block;
+	margin: 0xp;
+	width: 80%;
+}
+
+.list-group {
+	margin-bottom: 0px;
+}
+
+.pull-right {
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+label.wish-title {
+	display: inline-block;
+	width: auto;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+

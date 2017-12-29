@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+
+{%block header%}
+	<nav>
+			<ul class="nav nav-pills pull-right">
+				<li role="presentation" class="active"><a href={{url_for("index")}}>Home</a>
+					</li>
+					<li role="presentation"><a href={{url_for("signIn")}}>Sign In</a>
+					</li>
+					<li role="presentation"><a href={{url_for("signUp")}}>Sign Up</a>
+					</li>
+			</ul>
+	</nav>
+	<h3 class="text-muted">Python Flask App</h3>
+{%endblock header%}
+
+{%block jumbotron%}
+<h1>{{error}}</h1>
+{%endblock jumbotron%}
+
+{%block footer%}
+{{super()}}
+{%endblock footer%}
